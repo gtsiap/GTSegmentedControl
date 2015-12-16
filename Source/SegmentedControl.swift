@@ -182,10 +182,6 @@ public class SegmentedControl: UIView {
             
             previousControl = control
         }
-        
-        previousControl.snp_makeConstraints { make in
-            make.bottom.equalTo(self)
-        }
     }
     
     private func removeSegmentedControlsFromView() {

@@ -24,10 +24,10 @@ import GTSegmentedControl
 class SegmentedTableViewCell: UITableViewCell {
 
     
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
-        label.text = "Choose"
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         
         return label
     }()
@@ -59,10 +59,10 @@ class SegmentedTableViewCell: UITableViewCell {
         }
         
         self.segmentedControl.snp_makeConstraints() { make in
-            make.top.equalTo(self.contentView).offset(10)
-            make.bottom.right.equalTo(self.contentView).offset(-10)
+            make.centerY.equalTo(self.label.snp_centerY).priorityLow()
+            make.right.equalTo(self.contentView).offset(-10)
             make.left.equalTo(self.label.snp_right)
+            make.height.lessThanOrEqualTo(self.contentView).offset(-10)
         }
     }
-
 }
