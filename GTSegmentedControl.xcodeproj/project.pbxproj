@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45159CEA1C218D4600677DDC /* GTSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 45159CE81C218D4600677DDC /* GTSegmentedControl.h */; };
+		45159CEA1C218D4600677DDC /* GTSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 45159CE81C218D4600677DDC /* GTSegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45159CF91C218E4F00677DDC /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45159CF81C218E4F00677DDC /* SnapKit.framework */; };
+		45159CFB1C218EA700677DDC /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45159CFA1C218EA700677DDC /* SegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		45159CE81C218D4600677DDC /* GTSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTSegmentedControl.h; sourceTree = "<group>"; };
 		45159CE91C218D4600677DDC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45159CF81C218E4F00677DDC /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		45159CFA1C218EA700677DDC /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			children = (
 				45159CE81C218D4600677DDC /* GTSegmentedControl.h */,
 				45159CE91C218D4600677DDC /* Info.plist */,
+				45159CFA1C218EA700677DDC /* SegmentedControl.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45159CFB1C218EA700677DDC /* SegmentedControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +236,7 @@
 		45159CB21C21851600677DDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -247,12 +252,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.terietor.GTSegmentedControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		45159CB31C21851600677DDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
