@@ -274,4 +274,17 @@ public class SegmentedControl: UIView {
         )
     }
     
+    public override func intrinsicContentSize() -> CGSize {
+        var height: CGFloat = 0
+        
+        for (index, control) in self.segmentedControls.enumerate() {
+            if index != 0 {
+                height += CGFloat(self.spacing)
+            }
+            
+            height += control.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        }
+        
+        return CGSize(width: UIViewNoIntrinsicMetric, height: height)
+    }
 }
