@@ -80,7 +80,7 @@ public class SegmentedControl: UIView {
     /**
      It is called when value changes
      */
-    public var valueDidChange: ((String?) -> ())?
+    public var valueDidChange: ((String) -> ())?
     
     /**
         This color will be used as the tintColor of the
