@@ -14,6 +14,10 @@
 		45159CE01C218CB800677DDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45159CDA1C218CB800677DDC /* ViewController.swift */; };
 		45159CF21C218D8900677DDC /* GTSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45159CE61C218D2700677DDC /* GTSegmentedControl.framework */; };
 		45159CF31C218D8900677DDC /* GTSegmentedControl.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45159CE61C218D2700677DDC /* GTSegmentedControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45159CFD1C21905600677DDC /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45159CFC1C21905600677DDC /* TableViewController.swift */; };
+		45159CFF1C2190F100677DDC /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45159CFE1C2190F100677DDC /* SegmentedTableViewCell.swift */; };
+		45159D011C2190FF00677DDC /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45159D001C2190FF00677DDC /* TextFieldTableViewCell.swift */; };
+		45159D031C21914D00677DDC /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45159D021C21914D00677DDC /* SnapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 		45159CD91C218CB800677DDC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45159CDA1C218CB800677DDC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		45159CE11C218D2700677DDC /* GTSegmentedControl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GTSegmentedControl.xcodeproj; sourceTree = "<group>"; };
+		45159CFC1C21905600677DDC /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		45159CFE1C2190F100677DDC /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		45159D001C2190FF00677DDC /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		45159D021C21914D00677DDC /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45159CF21C218D8900677DDC /* GTSegmentedControl.framework in Frameworks */,
+				45159D031C21914D00677DDC /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +82,7 @@
 		45159CB41C218C0100677DDC = {
 			isa = PBXGroup;
 			children = (
+				45159D021C21914D00677DDC /* SnapKit.framework */,
 				45159CE11C218D2700677DDC /* GTSegmentedControl.xcodeproj */,
 				45159CD21C218CB800677DDC /* Example */,
 				45159CBE1C218C0100677DDC /* Products */,
@@ -96,6 +106,9 @@
 				45159CD71C218CB800677DDC /* Main.storyboard */,
 				45159CD91C218CB800677DDC /* Info.plist */,
 				45159CDA1C218CB800677DDC /* ViewController.swift */,
+				45159CFC1C21905600677DDC /* TableViewController.swift */,
+				45159CFE1C2190F100677DDC /* SegmentedTableViewCell.swift */,
+				45159D001C2190FF00677DDC /* TextFieldTableViewCell.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -216,7 +229,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				45159CE01C218CB800677DDC /* ViewController.swift in Sources */,
+				45159CFD1C21905600677DDC /* TableViewController.swift in Sources */,
+				45159CFF1C2190F100677DDC /* SegmentedTableViewCell.swift in Sources */,
 				45159CDB1C218CB800677DDC /* AppDelegate.swift in Sources */,
+				45159D011C2190FF00677DDC /* TextFieldTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +353,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -349,6 +369,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
