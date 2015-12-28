@@ -43,7 +43,10 @@ class SegmentedTableViewCell: UITableViewCell {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.itemsPerRow = 3
         segmentedControl.spacing = 10
-        
+
+        segmentedControl.tintColor = UIColor.redColor()
+        segmentedControl.textColor = UIColor.blackColor()
+
         return segmentedControl
     }()
     

@@ -81,19 +81,38 @@ public class SegmentedControl: UIView {
         It is called when value changes
      */
     public var valueDidChange: ((String) -> ())?
-    
-    /**
-        This color will be used as the tintColor of the
-        UISegmentedControl
-     */
-    public static var controlColor: UIColor?
-    
+
     /**
         This color will be used as the color of the
         UISegmentedControl's text
      */
-    public static var textColor: UIColor?
-    
+    public var textColor: UIColor? {
+        didSet {
+            // TODO
+            // We can't use UIAppearance.appearanceWhenContainedInInstancesOfClasses
+            // because we need iOS 8.4 so lets do the theming manually
+            applyTextColor()
+        }
+    }
+
+    public override func tintColorDidChange() {
+        for control in self.segmentedControls {
+            control.tintColor = self.tintColor
+        }
+    }
+
+    private func applyTextColor() {
+
+        if let tintColor = self.textColor {
+            for control in self.segmentedControls {
+                control.setTitleTextAttributes([
+                    NSForegroundColorAttributeName: tintColor,
+                    NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize())
+                ], forState: .Selected)
+            }
+        }
+    }
+
     private var segmentedControls: [UISegmentedControl] = [UISegmentedControl]()
     
     private var kvoContext = UInt8()
@@ -150,18 +169,8 @@ public class SegmentedControl: UIView {
             // TODO
             // We can't use UIAppearance.appearanceWhenContainedInInstancesOfClasses
             // because we need iOS 8.4 so lets do the theming manually
-            
-            control.tintColor = SegmentedControl.controlColor
-            
-            if let tintColor = SegmentedControl.textColor {
-                control.setTitleTextAttributes([
-                    NSForegroundColorAttributeName: tintColor,
-                    NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize())
-                    ], forState: .Selected)
-            } else {
-                print("\(__FILE__):\(__LINE__): Tint Color is missing!!! No theming will be applied")
-            }
-            
+            applyTextColor()
+
             addObserverForSegmentedControl(control)
             
             addSubview(control)
@@ -211,7 +220,7 @@ public class SegmentedControl: UIView {
             } // end for index
         } // end for
     }
-    
+
     // MARK: KVO
     public override func observeValueForKeyPath(
         keyPath: String?,
