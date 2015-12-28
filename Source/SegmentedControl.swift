@@ -22,12 +22,12 @@ import UIKit
 import SnapKit
 
 /**
- A multiline segmented control
+    A multiline segmented control
  */
 public class SegmentedControl: UIView {
     
     /**
-     The items of the segmented control
+        The items of the segmented control
      */
     public var items: [AnyObject] = [AnyObject]() {
         didSet {
@@ -36,7 +36,7 @@ public class SegmentedControl: UIView {
     }
     
     /**
-     Items per row
+        Items per row
      */
     public var itemsPerRow = 3 {
         didSet {
@@ -45,7 +45,7 @@ public class SegmentedControl: UIView {
     }
     
     /**
-     Spacing between the rows
+        Spacing between the rows
      */
     public var spacing: Double = 0 {
         didSet {
@@ -56,7 +56,7 @@ public class SegmentedControl: UIView {
     private var _value: String?
     
     /**
-     The value for the current selected segment
+        The value for the current selected segment
      */
     public var value: String? {
         get {
@@ -78,7 +78,7 @@ public class SegmentedControl: UIView {
     }
     
     /**
-     It is called when value changes
+        It is called when value changes
      */
     public var valueDidChange: ((String) -> ())?
     
