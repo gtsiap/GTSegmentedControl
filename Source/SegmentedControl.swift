@@ -107,7 +107,8 @@ public class SegmentedControl: UIView {
             for control in self.segmentedControls {
                 control.setTitleTextAttributes([
                     NSForegroundColorAttributeName: tintColor,
-                    NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize())
+                    NSFontAttributeName: UIFont
+                        .preferredFontForTextStyle(UIFontTextStyleHeadline)
                 ], forState: .Selected)
             }
         }
