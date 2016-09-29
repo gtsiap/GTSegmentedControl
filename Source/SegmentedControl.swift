@@ -88,8 +88,11 @@ public class SegmentedControl: UIView {
      */
     public var textColor: UIColor? {
         didSet {
+            guard let textColor = self.textColor else {
+                return
+            }
             let attributes = [
-                NSForegroundColorAttributeName: tintColor,
+                NSForegroundColorAttributeName: textColor,
                 NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
             ]
 
