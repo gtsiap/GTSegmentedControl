@@ -44,12 +44,12 @@ class TextFieldTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.label)
         self.contentView.addSubview(self.textField)
         
-        self.label.snp_makeConstraints() { make in
+        self.label.snp.makeConstraints() { make in
             make.left.top.equalTo(self.contentView).offset(10)
             make.bottom.equalTo(self.contentView).offset(-10)
         }
         
-        self.textField.snp_makeConstraints() { make in
+        self.textField.snp.makeConstraints() { make in
             make.top.equalTo(self.contentView).offset(10)
             make.bottom.right.equalTo(self.contentView).offset(-10)
         }

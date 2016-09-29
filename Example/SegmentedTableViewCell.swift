@@ -44,8 +44,8 @@ class SegmentedTableViewCell: UITableViewCell {
         segmentedControl.itemsPerRow = 3
         segmentedControl.spacing = 10
 
-        segmentedControl.tintColor = UIColor.redColor()
-        segmentedControl.textColor = UIColor.blackColor()
+        segmentedControl.tintColor = UIColor.red
+        segmentedControl.textColor = UIColor.black
 
         return segmentedControl
     }()
@@ -56,15 +56,15 @@ class SegmentedTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.label)
         self.contentView.addSubview(self.segmentedControl)
         
-        self.label.snp_makeConstraints() { make in
+        self.label.snp.makeConstraints() { make in
             make.left.top.equalTo(self.contentView).offset(10)
             make.bottom.equalTo(self.contentView).offset(-10)
         }
         
-        self.segmentedControl.snp_makeConstraints() { make in
-            make.centerY.equalTo(self.label.snp_centerY).priorityLow()
+        self.segmentedControl.snp.makeConstraints() { make in
+            make.centerY.equalTo(self.label.snp.centerY).priority(UILayoutPriorityDefaultLow)
             make.right.equalTo(self.contentView).offset(-10)
-            make.left.equalTo(self.label.snp_right)
+            make.left.equalTo(self.label.snp.right)
             make.height.lessThanOrEqualTo(self.contentView).offset(-10)
         }
     }

@@ -29,7 +29,7 @@ public class SegmentedControl: UIView {
     /**
         The items of the segmented control
      */
-    public var items: [AnyObject] = [AnyObject]() {
+    public var items: [Any] = [Any]() {
         didSet {
             createSegmentedControls()
         }
@@ -88,29 +88,20 @@ public class SegmentedControl: UIView {
      */
     public var textColor: UIColor? {
         didSet {
-            // TODO
-            // We can't use UIAppearance.appearanceWhenContainedInInstancesOfClasses
-            // because we need iOS 8.4 so lets do the theming manually
-            applyTextColor()
+            let attributes = [
+                NSForegroundColorAttributeName: tintColor,
+                NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+            ]
+
+            UISegmentedControl
+                .appearance(whenContainedInInstancesOf: [type(of: self)])
+                .setTitleTextAttributes(attributes, for: .selected)
         }
     }
 
     public override func tintColorDidChange() {
         for control in self.segmentedControls {
             control.tintColor = self.tintColor
-        }
-    }
-
-    private func applyTextColor() {
-
-        if let tintColor = self.textColor {
-            for control in self.segmentedControls {
-                control.setTitleTextAttributes([
-                    NSForegroundColorAttributeName: tintColor,
-                    NSFontAttributeName: UIFont
-                        .preferredFontForTextStyle(UIFontTextStyleHeadline)
-                ], forState: .Selected)
-            }
         }
     }
 
@@ -143,50 +134,45 @@ public class SegmentedControl: UIView {
         
         addSegmentedControlsToView()
     }
-    
+
+    @discardableResult
     private func addSegment(
-        segmentedControl: UISegmentedControl,
-        item: AnyObject
-        ) -> Bool {
-            guard
-                segmentedControl.numberOfSegments < self.itemsPerRow
-                else { return false }
+        _ segmentedControl: UISegmentedControl,
+        item: Any
+    ) -> Bool {
+        guard
+            segmentedControl.numberOfSegments < self.itemsPerRow
+        else { return false }
             
-            let segmentIndex = segmentedControl.numberOfSegments
-            segmentedControl.insertSegmentWithTitle(
-                item as? String,
-                atIndex: segmentIndex,
-                animated: false
-            )
+        let segmentIndex = segmentedControl.numberOfSegments
+        segmentedControl.insertSegment(
+            withTitle: item as? String,
+            at: segmentIndex,
+            animated: false
+        )
             
-            return true
+        return true
     }
     
     private func addSegmentedControlsToView() {
         var previousControl: UISegmentedControl!
         
-        for (index, control) in self.segmentedControls.enumerate() {
-            
-            // TODO
-            // We can't use UIAppearance.appearanceWhenContainedInInstancesOfClasses
-            // because we need iOS 8.4 so lets do the theming manually
-            applyTextColor()
-
+        for (index, control) in self.segmentedControls.enumerated() {
             addObserverForSegmentedControl(control)
             
             addSubview(control)
             
             if index == 0 {
-                control.snp_makeConstraints() { make in
+                control.snp.makeConstraints() { make in
                     make.left.right.equalTo(self)
                     make.top.equalTo(self)
                 }
                 
             } else {
-                control.snp_makeConstraints() { make in
+                control.snp.makeConstraints() { make in
                     make.left.right.equalTo(self)
-                    make.top.equalTo(previousControl.snp_bottom)
-                        .offset(self.spacing).priorityLow()
+                    make.top.equalTo(previousControl.snp.bottom)
+                        .offset(self.spacing).priority(UILayoutPriorityDefaultLow)
                 }
             }
             
@@ -210,7 +196,7 @@ public class SegmentedControl: UIView {
         
         for control in self.segmentedControls {
             for index in 0...control.numberOfSegments - 1 {
-                let title = control.titleForSegmentAtIndex(index)
+                let title = control.titleForSegment(at: index)
                 guard value == title else { continue }
                 
                 // yes KVO sucks, but we don't have another
@@ -223,11 +209,11 @@ public class SegmentedControl: UIView {
     }
 
     // MARK: KVO
-    public override func observeValueForKeyPath(
-        keyPath: String?,
-        ofObject object: AnyObject?,
-        change: [String : AnyObject]?,
-        context: UnsafeMutablePointer<Void>)
+    open override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey : Any]?,
+        context: UnsafeMutableRawPointer?)
     {
         
         if keyPath != "selectedSegmentIndex" &&
@@ -240,7 +226,7 @@ public class SegmentedControl: UIView {
         
         if let
             value = segmentedControl
-                .titleForSegmentAtIndex(segmentedControl.selectedSegmentIndex)
+                .titleForSegment(at: segmentedControl.selectedSegmentIndex)
         {
             self._value = value
             self.valueDidChange?(value)
@@ -263,7 +249,7 @@ public class SegmentedControl: UIView {
         
     }
     
-    private func removeObserverForSegmentedControl(control: UISegmentedControl) {
+    private func removeObserverForSegmentedControl(_ control: UISegmentedControl) {
         control.removeObserver(
             self,
             forKeyPath: "selectedSegmentIndex",
@@ -271,24 +257,24 @@ public class SegmentedControl: UIView {
         )
     }
     
-    private func addObserverForSegmentedControl(control: UISegmentedControl) {
+    private func addObserverForSegmentedControl(_ control: UISegmentedControl) {
         control.addObserver(
             self,
             forKeyPath: "selectedSegmentIndex",
-            options: [.Old, .New],
+            options: [.old, .new],
             context: &self.kvoContext
         )
     }
     
-    public override func intrinsicContentSize() -> CGSize {
+    open override var intrinsicContentSize : CGSize {
         var height: CGFloat = 0
         
-        for (index, control) in self.segmentedControls.enumerate() {
+        for (index, control) in self.segmentedControls.enumerated() {
             if index != 0 {
                 height += CGFloat(self.spacing)
             }
             
-            height += control.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+            height += control.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         }
         
         return CGSize(width: UIViewNoIntrinsicMetric, height: height)
